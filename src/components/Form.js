@@ -1,7 +1,8 @@
 //Create form  with inpit fileds Username, password, age, gender (male, female, or other options), and occupation.
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import UserInfo from './UserInfo';
+import '../App.css';
 
 export default class Form extends Component {
     constructor(props){
@@ -13,7 +14,7 @@ export default class Form extends Component {
             Age: "",
             Gender:"",
             Occupation:"",
-            FormData:""
+            FormData:[]
 
         }
         
@@ -33,59 +34,60 @@ export default class Form extends Component {
 
     onSubmit=(event) =>{
         event.preventDefault();
-        console.log(this.state.UserName)
-       let name = {name: this.state.UserName};
+    //     console.log(this.state.UserName)
+    //    let name = {name: this.state.UserName};
 
-    alert(JSON.stringify(name));
-    console.log("name", name);
-    console.log(this.state);
+    // alert(JSON.stringify(name));
+    // console.log("name", name);
+    //passing data to another component
     this.setState({FormData: <UserInfo 
         UserName={this.state.UserName}
+        Password={this.state.Password}
+        Age={this.state.Age}
+        Gender={this.state.Gender}
+        Occupation={this.state.Occupation}
        
 
         /> })
-}
+    }
     render() {
         return (
            
-
+<React.Fragment>
+        <div className="form">
                 <form onSubmit={this.onSubmit} >
                    <label>
-                       UserName
-                       <input type="text" name="UserName" value={this.state.UserName} onChange={this.onChange}></input>
-                    </label>
+                       UserName:  </label>
+                       <input type="text" name="UserName" value={this.state.UserName} onChange={this.onChange}></input>            
                     <br/>
                     <label>
-                        Password
-                        <input type="text" name="Password" value={this.state.Password} onChange={this.onChange} />
-                    </label>
+                        Password:  </label>
+                        <input type="text" name="Password" value={this.state.Password} onChange={this.onChange} />          
                     <br/>
                     <label>
-                        Age
+                        Age:  </label>
                         <input type="text" name="Age" onChange={this.onChange} />
-                    </label>
                     <br/>
                     <label>
-                        Gender
+                        Gender:    </label>
                         Male <input type="radio" name="Gender" onChange={this.onChange} />
                         female<input
                         type="radio" name="Gender"  onChange={this.onChange}/>
                         other<input
                         type="radio" name="Gender"  onChange={this.onChange}/>
-                    </label>
                     <br/>
                     <label>
-                        Occupation
+                        Occupation    </label>
                         <input type="text" name="Occupation" onChange={this.onChange}/>
-                    </label>
                     <br/>
                     <label>
                         <input type="submit" value="Submit" />
-                    </label>
-                  
-               </form> 
-               
-            
+                    </label>   
+                </form> 
+              <div>{this.state.FormData}
+              </div> 
+        </div>     
+            </React.Fragment>
         )
     }
 }
